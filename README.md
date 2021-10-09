@@ -6,8 +6,8 @@
 [Meshroom](#https://alicevision.org/) is an open source tool for creating 3d models out of images, the purpose of this repository is create a code that can use the CLI tool of the software to automate the process of creating 3d meshes.
 
 #### Technologies used: ####
-* Python 3.7
-* Meshroom 2020.1.1
+* Python 3.7/3.8
+* Meshroom 2020.1.1/2021.1.0
 
 #### Setup ####
 The code of the project is located in the Meshroom_CLI.py script, which contains a function for each of the nodes used in Meshroom. The Main function of the script call all the nodes one by one creating folders for each of the steps. 
@@ -56,5 +56,21 @@ The script contains 13 functions (one for each node). Each function calls a .exe
 ### Small image set ###
 
 for testing purposes, there is a small database of 6 pictures located in /dataset_monstree-master/mini6 . Those files are not needed to run the code and can be dismissed.
+
+### Differences from the original Repo ###
+* Rewrite the script to adjust for Linux environment. Tested on Ubuntu 20.04
+* Add script to read frames from a video shot, an easier way to prepare your own dataset. Here is an example:
+```
+python vid2frames.py "path/to/the/video" "path/to/store/the/frames"
+```
+* some parameters:
+  * rescale: Rescale the frames. Default 1.0
+  * skip   : Skip number of frames after saving each key frame. Default 0
+  * width  : Specify the width of retrieved frame, this also overwrites the rescaled width.
+  * height : Specify the height of retrieved frame, this also overwrites the rescaled height.
+```
+python vid2frames.py "path/to/the/video" "path/to/store/the/frames" -s 10 -r 0.5 --width 1280 --height 720
+```
+* Add a shell script(Run.sh) to demonstrate the video-to-mesh pipeline
 
 
