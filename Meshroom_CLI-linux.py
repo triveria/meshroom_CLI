@@ -336,6 +336,7 @@ def main():
     baseDir = sys.argv[2]           ##  --> name of the Folder containing the process (a new folder will be created)
     imgDir = sys.argv[3]            ##  --> Folder containing the images 
 
+    os.chdir(str(Path(binPath).parent) + '/lib')  ## move to the directory where shared libs are located
     numberOfImages =  len([name for name in os.listdir(imgDir) if os.path.isfile(os.path.join(imgDir, name))])      ## number of files in the folder
 
     SilentMkdir(baseDir)
@@ -351,7 +352,7 @@ def main():
     run_7_depthMap(binPath,baseDir , numberOfImages )
     run_8_depthMapFilter(binPath,baseDir)
     run_9_meshing(binPath,baseDir)
-    run_10_meshFiltering(binPath,baseDir)
+    run_10_meshFiltering(binPath,baseDir, 'False')
     run_11_meshDecimate(binPath,baseDir)
     run_12_meshResampling(binPath,baseDir)
     run_13_texturing(binPath,baseDir)
@@ -366,3 +367,4 @@ def main():
 
 
 main()
+
