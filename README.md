@@ -73,4 +73,13 @@ python vid2frames.py "path/to/the/video" "path/to/store/the/frames" -s 10 -r 0.5
 ```
 * Add a shell script(Run.sh) to demonstrate the video-to-mesh pipeline
 
+### Examples ###
+* Water Dispenser
 
+<img src="examples/pic_yinshuiji.jpg" alt="drawing" width="200" />
+<img src="examples/mesh_yinshuiji.png" alt="drawing" width="300" height='356'/>
+
+* Mask
+
+<img src="examples/pic_mask.jpg" alt="drawing" width="200"  height='150'/>
+<img src="examples/mesh_mask.png" alt="drawing" width="200"/>
