@@ -4,10 +4,11 @@ import shutil
 import math
 import time
 from pathlib import Path
+import subprocess
 
 dirname = os.path.dirname(os.path.abspath(__file__))  # Absolute path of this file
 
-verboseLevel = "\"" + "error" + "\""  # detail of the logs (error, info, etc)
+verboseLevel = "info" # detail of the logs (error, info, etc)
 
 
 def SilentMkdir(theDir):    # function to create a directory
@@ -25,23 +26,23 @@ def run_1_cameraInit(binPath,baseDir,imgDir):
 
     print("----------------------- 1/13 CAMERA INITIALIZATION -----------------------")
 
-    imageFolder = "\"" + imgDir + "\""
     sensorDatabase = "\""+ str(Path(binPath).parent) + "/share/aliceVision/cameraSensors.db" "\"" # Path to the sensors database, might change in later versions of meshrrom
    
     output = "\"" + baseDir + taskFolder + "/cameraInit.sfm" + "\""
 
-    cmdLine = binPath + "/aliceVision_cameraInit"
-    cmdLine += " --imageFolder {0} --sensorDatabase {1} --output {2}".format(
-        imageFolder, sensorDatabase, output)
+    cmdLine = [
+        "aliceVision_cameraInit",
+        "--imageFolder", imgDir,
+        "--sensorDatabase", sensorDatabase,
+        "--output", output,
+        "--defaultFieldOfView", "45", 
+        "--allowSingleView", "1",
+        "--verboseLevel", verboseLevel
+    ]
 
-    cmdLine += " --defaultFieldOfView 45" 
-    cmdLine += " --allowSingleView 1"
-    cmdLine += " --verboseLevel " + verboseLevel
-
-    print(cmdLine)
-    os.system(cmdLine)
-
-    return 0
+    cmdLineStr = " ".join(cmdLine)
+    print(cmdLineStr)
+    subprocess.run(cmdLine)
 
 
 def run_2_featureExtraction(binPath,baseDir , numberOfImages , imagesPerGroup=40):
